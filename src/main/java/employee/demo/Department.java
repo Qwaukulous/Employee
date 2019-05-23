@@ -4,6 +4,8 @@ package employee.demo;
 import javax.naming.Name;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Department {
@@ -12,9 +14,15 @@ public class Department {
     private long id;
 
     @NotNull
+    @Size(min = 5)
     private String Company;
     @NotNull
+    @Size(min = 5)
     private String Name;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public Set<Employee> employees;
+
 
     public Department() {
     }
